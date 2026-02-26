@@ -3,8 +3,13 @@ import dashBoard from "../../assets/dashBoard.png";
 import boussole from "../../assets/boussole.svg";
 import book from "../../assets/book.svg";
 import { getMember } from "../../utils/getMember";
+import { getProjects } from "../../utils/getProjects";
+import { getTasks } from "../../utils/getTasks";
 
 const DashBoard = ({ userId }) => {
+  /* Project in which you are either owner or member */
+  const participatingProjects = getProjects(userId);
+  const allTasks = getTasks(userId);
   const member = getMember(userId);
   return (
     <div className="page-content">
@@ -22,22 +27,23 @@ const DashBoard = ({ userId }) => {
 
       <div className="project-task-grid">
         <div className="grid-card">
-          <div className="number">4</div>
+          <div className="number">{participatingProjects.filter((project)=>project.status === "Planifié").length}</div>
           <div className="card-detail">Project planified</div>
           <div className="icon"></div>
         </div>
         <div className="grid-card">
-          <div className="number">9</div>
+          <div className="number">{participatingProjects.filter((project)=>project.status === "En cours").length}</div>
           <div className="card-detail">Project ongoing</div>
           <img src={boussole} alt="" className="icon" />
         </div>
         <div className="grid-card">
-          <div className="number">9</div>
+          <div className="number">{allTasks.length}</div>
           <div className="card-detail">Total Tasks</div>
           <img src={book} alt="" className="icon" />
         </div>
         <div className="grid-card">
-          <div className="number">9</div>
+          <div className="number">{participatingProjects.reduce((sum, project)=> sum + project.budget
+            , 0 )}</div>
           <div className="card-detail">Total Budget</div>
           <span className="icon">$</span>
         </div>
@@ -46,61 +52,44 @@ const DashBoard = ({ userId }) => {
       <div className="section project">
         <h1>Actual Projects</h1>
         <div className="project-grid">
-          <div className="project">
-            <p className="project-title">Refonte du site de studies learning</p>
-            <p className="status pending">Pending</p>
-            <div className="progress">
-              <p className="percentage">45%</p>
-              <div className="progress-bar">
-                <div
-                  className="progress-level"
-                  style={{
-                    width: `45%`,
-                  }}
-                ></div>
+          {participatingProjects.map((project) => {
+            return (
+              <div className="project">
+                <p className="project-title">{project.title}</p>
+                <p
+                  className={`status ${
+                    project.status === "En cours"
+                      ? "pending"
+                      : project.status === "Planifié"
+                        ? "blocked"
+                        : "completed"
+                  }`}
+                >
+                  {project.status}
+                </p>
+                <div className="progress">
+                  <p className="percentage">{project.progress}%</p>
+                  <div className="progress-bar">
+                    <div
+                      className="progress-level"
+                      style={{
+                        width: `${project.progress}%`,
+                      }}
+                    ></div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <p className="date pending">31 jan 2026 - 21 fev 2026</p>
-          </div>
-          <div className="project">
-            <p className="project-title">Application de gestion de projet</p>
-            <p className="status completed">Completed</p>
-            <div className="progress">
-              <p className="percentage">100%</p>
-              <div className="progress-bar">
-                <div
-                  className="progress-level"
-                  style={{
-                    width: `100%`,
-                  }}
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div className="project">
-            <p className="project-title">Application de gestion de depenses</p>
-            <p className="status blocked">Blocked</p>
-            <div className="progress">
-              <p className="percentage">15%</p>
-              <div className="progress-bar">
-                <div
-                  className="progress-level"
-                  style={{
-                    width: `15%`,
-                  }}
-                ></div>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
 
       <section className="section kanban">
         <h1>Follow your tasks</h1>
         <div className="grid">
-          <KanbanNode title="To do" />
-          <KanbanNode title="Ongoing" />
-          <KanbanNode title="Completed" />
+          <KanbanNode title="To do" tasks={allTasks.filter(task => task.status === "À faire")} />
+          <KanbanNode title="Ongoing" tasks={allTasks.filter(task => task.status === "En cours")}/>
+          <KanbanNode title="Completed" tasks={allTasks.filter(task => task.status === "Terminé")}/>
         </div>
       </section>
     </div>

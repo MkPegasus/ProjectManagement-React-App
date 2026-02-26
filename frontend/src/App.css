@@ -6,6 +6,15 @@
   font-family: Montserrat, sans-serif;
   font-size: 16px;
 }
+.urgent {
+  background: rgb(241, 55, 55);
+}
+.average {
+  background: rgb(241, 194, 55);
+}
+.low {
+  background: rgb(179, 241, 55);
+}
 .dashboard {
   width: 100%;
   display: grid;
@@ -315,6 +324,7 @@ hr {
 .project-task-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
 }
 
 .grid-card {
@@ -464,7 +474,7 @@ hr {
           }
         }
       }
-      .date{
+      .date {
         margin-top: 1rem;
         text-align: center;
         font-weight: 800;
@@ -473,60 +483,78 @@ hr {
     }
   }
 }
-.section.kanban .grid{
+.section.kanban .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
   gap: 1rem;
 }
-.Kanban-node{
+.Kanban-node {
   border-radius: 10px;
   display: inline-block;
-  background: #f8f7fc;
+  background: #f4f4f6;
+  box-shadow: 0 0 15px 5px #dee0f2;
+  height: fit-content;
 }
-.Kanban-node .kb-header{
+.Kanban-node .kb-header {
   padding: 1rem;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  color: #fff;
-}
-.Kanban-node .kb-header.todo{
-  background: linear-gradient( 45deg, #0f068a,#1304e9);
+  display: flex;
+  justify-content: space-between;
 
+  .title,
+  .count {
+    color: #fff;
+  }
 }
-.Kanban-node .kb-header.pending{
-  background: linear-gradient( 45deg, #8a3006,#e92a04);
+.Kanban-node .kb-header.todo {
+  background: linear-gradient(45deg, #0f068a, #1304e9);
 }
-.Kanban-node .kb-header.completed{
+.Kanban-node .kb-header.pending {
+  background: linear-gradient(45deg, #8a3006, #e92a04);
+}
+.Kanban-node .kb-header.completed {
   background: var(--completed);
 }
 
-.Kanban-node .kb-body{
-  padding: .5rem;
+.Kanban-node .kb-body {
+  padding: 0.5rem;
 }
 
-.task-card{
-  padding: .5rem;
+.task-card {
+  padding: 0.5rem;
   border-radius: 10px;
   box-shadow: 0 0 15px 5px #dee0f2;
-
-  .details{
+  margin-bottom: 0.5rem;
+  .title .description {
+    font-size: 0.7rem;
+    padding-left: 0.5rem;
+  }
+  .project-name {
+    text-align: center;
+    margin: 0.7rem;
+    font-size: 0.8rem;
+  }
+  .priority-member {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .status{
-      padding: .4rem;
-      margin-top: .5rem;
+    margin-top: 0.8rem;
+    .priority {
+      padding: 0.4rem;
+      font-size: 0.7rem;
       color: #fff;
       font-weight: 800;
-      background: var(--secondary-color);
       border-radius: 15px;
     }
-
-    .members{
+    .dates {
+      font-size: 0.7rem;
+    }
+    .members {
       display: flex;
       justify-content: center;
 
-      .member{
+      .member {
         background: var(--main-bg);
         width: 35px;
         color: #fff;
