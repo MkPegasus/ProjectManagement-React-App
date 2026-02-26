@@ -1,5 +1,5 @@
 import KanbanNode from "../../components/KanbanNode";
-import dashBoard from "../../assets/dashBoard.png";
+import dashBoard from "../../assets/dashboard.png";
 import boussole from "../../assets/boussole.svg";
 import book from "../../assets/book.svg";
 import { getMember } from "../../utils/getMember";
