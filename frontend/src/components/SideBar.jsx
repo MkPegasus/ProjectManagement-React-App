@@ -1,4 +1,5 @@
 import ProfileImg from "../assets/bg.png";
+import logo from "../assets/logo.png";
 import { menuItems } from "../data/data";
 
 const SideBar = ({ active, setActive }) => {
@@ -32,7 +33,7 @@ const SideBar = ({ active, setActive }) => {
           </ul>
         </div>
       </div>
-
+      {/* <img src={logo} alt="Application logo" /> */}
       <footer className="footer">
         <p>©MikeSquared Tech</p>
       </footer>
