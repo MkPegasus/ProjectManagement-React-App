@@ -1,9 +1,11 @@
+import { LayoutDashboard, FolderKanban, CheckSquare, Users, User } from "lucide-react";
+
 export const menuItems = [
-  { title: "Dashboard", icon: "" },
-  { title: "Projects", icon: "" },
-  { title: "Tasks", icon: "" },
-  { title: "Team", icon: "" },
-  { title: "Account", icon: "" },
+  { title: "Dashboard", icon: LayoutDashboard , link: "." },
+  { title: "Projects", icon: FolderKanban, link: "projects" },
+  { title: "Tasks", icon: CheckSquare, link: "tasks" },
+  { title: "Team", icon: Users, link: "team" },
+  { title: "Account", icon: User, link: "account" },
 ];
 export const listFilter = ["All", "Planified", "Pending", "Completed"];
 

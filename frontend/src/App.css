@@ -29,6 +29,11 @@
   flex-flow: column;
   justify-content: space-between;
 }
+.sidebar-logo{
+  width: 700px;
+  transform: translate(-250px) rotate(-45deg);
+  filter: opacity(.3);
+}
 .profile-section {
   padding: 1rem;
   margin-top: 1rem;
@@ -78,18 +83,27 @@ hr {
 .menu {
   list-style: none;
   padding: 1rem 0 0 2rem;
+  display: flex;
+  flex-direction: column;
   line-height: 2.5rem;
 }
-.menu li {
+.menu .menu-item {
   color: #fff;
   font-weight: 500;
   font-size: 14px;
   padding: 0.5rem;
+  display: flex;
+  align-items: center;
   border-bottom-left-radius: 15px;
   border-top-left-radius: 15px;
   transition: 0.1s;
+  text-decoration: none;
+  .menu-item-icon{
+    margin-right: .5rem;
+    color: #fff;
+  }
 }
-.menu li.active {
+.menu .menu-item.active {
   padding-right: 3rem;
   background: #191646ec;
   color: var(--secondary-color);

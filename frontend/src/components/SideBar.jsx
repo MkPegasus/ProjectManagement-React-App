@@ -1,6 +1,7 @@
+import { NavLink } from "react-router-dom";
 import ProfileImg from "../assets/bg.png";
 import logo from "../assets/logo.png";
-import { menuItems } from "../data/data";
+import { menuItems } from "../data/data"; /* for dynamic loading of menu elements */
 
 const SideBar = ({ active, setActive }) => {
   return (
@@ -20,20 +21,33 @@ const SideBar = ({ active, setActive }) => {
         <hr />
         <div className="menu-container">
           <ul className="menu">
-            {menuItems.map((item, index) => (
-              <li
+            {menuItems.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                to={item.link}
                 key={index}
-                className={index === active ? "active" : ""}
-                onClick={() => setActive(index)}
+                end
+                /**
+                 * Normally the className attribut accept solely string
+                 * But NavLink permits the className attribut to accept a method that returns a string
+                 * This method takes a parameter (an object) that is "true" is the link corresponds, "false" otherwise
+                */
+               className={({ isActive }) =>
+                `menu-item ${isActive ? "active" : ""}`
+              }
+              onClick={() => setActive(index)}
               >
-                <span>{item.icon}</span>
-                {item.title}
-              </li>
-            ))}
+                  
+                  <Icon size={20} className="menu-item-icon" color="#fff"/> 
+                  {item.title}
+                </NavLink>
+              );
+            })}
           </ul>
         </div>
       </div>
-      {/* <img src={logo} alt="Application logo" /> */}
+      <img className="sidebar-logo" src={logo} alt="Application logo" />
       <footer className="footer">
         <p>©MikeSquared Tech</p>
       </footer>

@@ -6,9 +6,10 @@ import ProjectCard from "../../components/ProjectCard";
 const Projects = ({ userId }) => {
   const [filter, setFilter] = useState("All");
   const [sortBy, setSortBy] = useState("dateCreation");
-  /* Sort Function */
-  
-  /* Ensures that the displayed projects are project related to the actual member (as ProjectManager or SimpleMember) */
+  /** 
+   *Ensures that the displayed projects are project related to the actual member (as ProjectManager or SimpleMember)
+   *then filters the list following the filter criteria and sort following the sort selected
+   */
   const projectList = useMemo(() => {
     return projects
       .filter(
