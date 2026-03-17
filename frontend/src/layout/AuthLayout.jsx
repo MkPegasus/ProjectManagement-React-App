@@ -1,5 +1,4 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import video from "../assets/bg-video.mp4"
 const AuthLayout = () => {
   /*Hook to navigate between pages from JS code  */
   const navigate = useNavigate();
